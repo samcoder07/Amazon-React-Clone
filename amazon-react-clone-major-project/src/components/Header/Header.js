@@ -3,15 +3,16 @@ import { logo } from '../../assets/index'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { allItems } from '../../constants';
+import HeaderBottom from './HeaderBottom';
 const Header = () => {
 
   const [ShowAll, setShowAll] = useState(false);
 
   return (
-    <div>
-      <div className="w-full bg-amazon_blue text-white px-4 py-3 flex items-center gap-4">
+    <div className="w-full">
+      <div className="w-full bg-amazon_blue  py-3  text-white px-4 flex items-center gap-4">
         {/* image section start here  */}
         <div className="handerHover">
           <img src={logo} alt="logo" className="w-24 mt-2" />
@@ -26,7 +27,7 @@ const Header = () => {
         </div>
         {/* Deliver section end here  */}
         {/* Search section start here  */}
-        <div className='h-10 rounded-md flex flex-grow relative'>
+        <div className="h-10 rounded-md flex flex-grow relative">
           <span onClick={() =>setShowAll(!ShowAll)} className="w-14 h-full bg-gray-200 hover:bg-gray-300 border-2 duration-300 text-sm cursor-pointer rounded-tl-md rounded-bl-md text-amazon_blue font-titleFont flex items-center justify-center">All<span></span><ArrowDropDownIcon/></span>
           {ShowAll && (
             <div>
@@ -49,16 +50,22 @@ const Header = () => {
         {/* Signin section start here  */}
          <div className="flex flex-col items-start justify-center handerHover">
           <p className="text-sm text-lightText font-light">Hello, sign in</p>
-          <p>Accounts & Lists <span><ArrowDropDownIcon/></span></p>
+          <p className="text-sm font-semibold text-lightText -mt-1">Accounts & Lists <span><ArrowDropDownIcon/></span></p>
          </div>
         {/* Signin section end here  */}
         {/* Order section start here  */}
-
+          <div className="flex flex-col items-start justify-center handerHover">
+            <p className="text-xs text-lightText font-light">Returns</p>
+            <p className="text-sm font-semibold text-lightText -mt-1"> & Orders <span><ArrowDropDownIcon/></span></p>
+          </div>
         {/* Order section end here  */}
         {/* Cart section start here  */}
-
+          <div className="flex items-start justify-center handerHover relative"><ShoppingCartIcon/>
+          <p>Cart <span className='absolute text-xs -top-1 left-6 font-semibold p-1 h-4 bg-[#f3a847] text-amazon_blue rounded-full flex justify-center items-center'>0</span></p>
+          </div>
         {/* Cart section end here  */}
       </div>
+      <HeaderBottom/>
     </div>
   )
 }
