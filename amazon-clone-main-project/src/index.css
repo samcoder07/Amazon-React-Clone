@@ -2,7 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components{
     .handerHover{
         @apply px-2 h-[80%] flex items-center border border-transparent hover:border-white cursor-pointer duration-100
