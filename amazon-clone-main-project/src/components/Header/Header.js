@@ -11,7 +11,7 @@ const Header = () => {
   const [ShowAll, setShowAll] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className="w-full sticky top-0 z-50">
       <div className="w-full bg-amazon_blue  py-3  text-white px-4 flex items-center gap-4">
         {/* image section start here  */}
         <div className="handerHover">
