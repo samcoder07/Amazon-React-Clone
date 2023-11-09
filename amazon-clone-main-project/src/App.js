@@ -5,7 +5,6 @@ import{
   Outlet,Route,RouterProvider
 } from "react-router-dom"
 import Header from './components/Header/Header'
-import Banner from './components/Home/Banner'
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 
