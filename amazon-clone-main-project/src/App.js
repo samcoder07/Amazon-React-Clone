@@ -7,6 +7,7 @@ import{
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
+import { productsData } from './api/api';
 
 const Layout=()=>{
   return(
@@ -22,7 +23,7 @@ function App() {
   const router=createBrowserRouter(createRoutesFromElements(
   <Route>
     <Route path="/" element={<Layout/>}>
-    <Route index element={<Home/>}></Route>
+    <Route index element={<Home/>} loader={productsData}></Route>
     </Route>
   </Route>
   ));
