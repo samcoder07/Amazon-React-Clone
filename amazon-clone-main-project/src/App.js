@@ -28,10 +28,8 @@ function App() {
   </Route>
   ));
   return (
-    <div>
-    <RouterProvider router={router}>
-
-    </RouterProvider>
+    <div className='font-bodyFont bg-gray-100'>
+    <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
