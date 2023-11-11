@@ -8,6 +8,7 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import { productsData } from './api/api';
+import Signin from './pages/Signin';
 
 const Layout=()=>{
   return(
@@ -24,11 +25,12 @@ function App() {
   <Route>
     <Route path="/" element={<Layout/>}>
     <Route index element={<Home/>} loader={productsData}></Route>
-    </Route>
   </Route>
+    <Route path="/signin" element={<Signin/>}></Route>
+    </Route>
   ));
   return (
-    <div className='font-bodyFont bg-gray-100'>
+    <div className='font-bodyFont bg-gray-100 '>
     <RouterProvider router={router}></RouterProvider>
     </div>
   );
