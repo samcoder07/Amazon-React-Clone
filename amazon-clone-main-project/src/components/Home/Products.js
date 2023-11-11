@@ -9,7 +9,7 @@ const Products = () => {
   const data = useLoaderData();
   const productsData = data.data;
   return (
-    <div className="max-w-screen-2xl mx-auto grid grid-cols-4 gap-10 px-4">
+    <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:gap-10 gap-6 px-4">
       {productsData.map((item) => (
         <div
           key={item.id}

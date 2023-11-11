@@ -19,12 +19,14 @@ const Banner = () => {
     beforeChange:(prev,next)=>{
       setDoActive(next);
     },
-    appendDots: dots => (
+    appendDots: (dots) => (
       <div
         style={{
           position:"absolute",
           top:"70%",
-          left:"40%",
+          left:"0",
+          right:"0",
+          margin:"0 auto",
           transform:"translate(50% -50%)",
           width:"210px",
         }}
@@ -64,11 +66,11 @@ const Banner = () => {
       >
         {i + 1}
       </div>
-    )
+    ),
   };
   return (
-    <div className='w-full'>
-      <div className='w-full h-full relative'>
+    <div className="w-full">
+      <div className="w-full h-full relative">
         <Slider {...settings}>
           <div>
             <img src={bannerImgOne} alt="bannerImgOne" />

@@ -19,7 +19,7 @@ const Header = () => {
         </div>
         {/* image section end here  */}
         {/* Deliver section start here  */}
-        <div className="handerHover">
+        <div className="handerHover hidden mdl:inline-flex">
           <LocationOnIcon />
           <p className="text-sm text-lightText font-light flex flex-col">
           Deliver to <span className="text-sm font-semibold -mt-1 text-whiteText">India</span>
@@ -27,7 +27,7 @@ const Header = () => {
         </div>
         {/* Deliver section end here  */}
         {/* Search section start here  */}
-        <div className="h-10 rounded-md flex flex-grow relative">
+        <div className="h-10 rounded-md hidden lgl:flex flex-grow relative">
           <span onClick={() =>setShowAll(!ShowAll)} className="w-14 h-full bg-gray-200 hover:bg-gray-300 border-2 duration-300 text-sm cursor-pointer rounded-tl-md rounded-bl-md text-amazon_blue font-titleFont flex items-center justify-center">All<span></span><ArrowDropDownIcon/></span>
           {ShowAll && (
             <div>
@@ -49,12 +49,12 @@ const Header = () => {
         {/* Search section end here  */}
         {/* Signin section start here  */}
          <div className="flex flex-col items-start justify-center handerHover">
-          <p className="text-sm text-lightText font-light">Hello, sign in</p>
-          <p className="text-sm font-semibold text-lightText -mt-1">Accounts & Lists <span><ArrowDropDownIcon/></span></p>
+          <p className="text-sm mdl:text-xs text-white mdl:text-lightText font-light">Hello, sign in</p>
+          <p className="text-sm font-semibold text-lightText -mt-1 hidden mdl:inline-flex">Accounts & Lists <span><ArrowDropDownIcon/></span></p>
          </div>
         {/* Signin section end here  */}
         {/* Order section start here  */}
-          <div className="flex flex-col items-start justify-center handerHover">
+          <div className="hidden lgl:flex flex-col items-start justify-center handerHover">
             <p className="text-xs text-lightText font-light">Returns</p>
             <p className="text-sm font-semibold text-lightText -mt-1"> & Orders <span><ArrowDropDownIcon/></span></p>
           </div>
