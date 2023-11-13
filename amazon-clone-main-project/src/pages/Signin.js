@@ -32,7 +32,7 @@ const Signin = () => {
               </div>
               <button onClick={(e)=>e.preventDefault()} className='w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput'>Continue</button>
             </div>
-            <p className="text-xs text-black leading-4 mt-4">By Continuing, you agree to Amazon's <span className="text-blue-600">Conditions of Use{" "}</span> and <span className="text-blue-600">Private Notice.</span></p>
+            <p className="text-xs text-black leading-4 mt-4">By Continuing, you agree to Amazon's <span className="text-blue-600">Conditions of Use{" "}</span> and <span className="text-blue-600">Privacy Policy.</span></p>
             <p className="text-xs text-gray-600 mt-4 cursor-pointer"><ArrowRightIcon/> <span className="text-blue-600 group-hover:text-orange-700 group-hover:underline underline-offset-1">Need help?</span></p>
           </div>
             <p className="w-full text-xs text-gray-600 mt-4 flex items-center">
