@@ -67,6 +67,18 @@ const Registration = () => {
     }
     if (!cPassword) {
       setErrCPassword("Confirm your Password")
+    } else{
+      if(cPassword !== password){
+        setErrCPassword("Password not Matched")
+      }
+    }
+    
+    if (clientName && email && emailValidation(email) && password && password.length>=6 && cPassword && cPassword === password) {
+      console.log(clientName,email,password,cPassword);
+      setClientName("")
+      setEmail("")
+      setPassword("")
+      setCPassword("")
     }
   }
   // handle function end 
@@ -84,6 +96,7 @@ const Registration = () => {
                 <p className="text-sm font-medium">Your Name</p>
                 <input
                 onChange={handleName}
+                value={clientName}
                   type="text"
                   className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
@@ -97,8 +110,8 @@ const Registration = () => {
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Email or Phone Number</p>
                 <input
-                onClick={handleEmail}
-                  type="text"
+                onChange={handleEmail}
+                value={email}
                   className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
                   {
@@ -111,7 +124,8 @@ const Registration = () => {
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Password</p>
                 <input
-                onClick={handlePassword}
+                onChange={handlePassword}
+                value={password}
                   type="password"
                   className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
@@ -125,7 +139,8 @@ const Registration = () => {
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Re-enter Password</p>
                 <input
-                onClick={handleCPassword}
+                onChange={handleCPassword}
+                value={cPassword}
                   type="password"
                   className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
