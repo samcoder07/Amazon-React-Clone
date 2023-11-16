@@ -7,17 +7,20 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { allItems } from '../../constants';
 import HeaderBottom from './HeaderBottom';
 import { Link } from 'react-router-dom';
+import {useSelector} from 'react-redux';
 const Header = () => {
 
   const [ShowAll, setShowAll] = useState(false);
-
+  const products = useSelector((state) => state.amazonReducer.products);
   return (
     <div className="w-full sticky top-0 z-50">
       <div className="w-full bg-amazon_blue  py-3  text-white px-4 flex items-center gap-4">
         {/* image section start here  */}
+        <Link to="/">
         <div className="handerHover">
           <img src={logo} alt="logo" className="w-24 mt-2" />
         </div>
+        </Link>
         {/* image section end here  */}
         {/* Deliver section start here  */}
         <div className="handerHover hidden mdl:inline-flex">
@@ -63,9 +66,14 @@ const Header = () => {
           </div>
         {/* Order section end here  */}
         {/* Cart section start here  */}
-          <div className="flex items-start justify-center handerHover relative"><ShoppingCartIcon/>
-          <p>Cart <span className='absolute text-xs -top-1 left-6 font-semibold p-1 h-4 bg-[#f3a847] text-amazon_blue rounded-full flex justify-center items-center'>0</span></p>
+        <Link to="/cart">
+        <div className="flex items-start justify-center handerHover relative">
+          <ShoppingCartIcon/>
+          <p className="text-xs font-semibold mt-3 text-whiteText">
+          Cart 
+          <span className='absolute text-xs -top-1 left-6 font-semibold p-1 h-4 bg-[#f3a847] text-amazon_blue rounded-full flex justify-center items-center'>{products.length>0 ? products.length:0}</span></p>
           </div>
+        </Link>
         {/* Cart section end here  */}
       </div>
       <HeaderBottom/>
