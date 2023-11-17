@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 const Header = () => {
 
   const [ShowAll, setShowAll] = useState(false);
-  const products = useSelector((state) => state.amazonReducer.products);
+  const products = useSelector((state) => state.amazon.products);
   return (
     <div className="w-full sticky top-0 z-50">
       <div className="w-full bg-amazon_blue  py-3  text-white px-4 flex items-center gap-4">
@@ -71,7 +71,9 @@ const Header = () => {
           <ShoppingCartIcon/>
           <p className="text-xs font-semibold mt-3 text-whiteText">
           Cart 
-          <span className='absolute text-xs -top-1 left-6 font-semibold p-1 h-4 bg-[#f3a847] text-amazon_blue rounded-full flex justify-center items-center'>{products.length>0 ? products.length:0}</span></p>
+          <span className='absolute text-xs -top-1 left-6 font-semibold p-1 h-4 bg-[#f3a847] text-amazon_blue rounded-full flex justify-center items-center'>
+          {products.length>0 ? products.length:0}
+          </span></p>
           </div>
         </Link>
         {/* Cart section end here  */}
