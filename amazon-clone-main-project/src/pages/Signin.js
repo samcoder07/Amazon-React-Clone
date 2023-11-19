@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { darklogo } from "../assets/index";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Link } from "react-router-dom";
 const Signin = () => {
+  const[email,setEmail] = useState("")
+  const[password,setPassword] = useState("")
+  const [errEmail,setErrEmail] = useState("")
+  const[errPassword,setErrPassword] = useState("")
+
+  const handleEmail=(e)=>{
+    setEmail(e.target.value);
+    setErrEmail("");
+  }
+
+  const handlePassword=(e)=>{
+    setPassword(e.target.value);
+    setErrPassword("");
+  }
+
+  const handleLogin=(e)=>{
+    e.preventDefault();
+    if (!email) {
+      setErrEmail("Enter Your Email");
+    } 
+    if (!password) {
+      setErrPassword("Enter Your Password");
+    } 
+    if (email && password) {
+      console.log(email,password);
+      setEmail("")
+      setErrEmail("")
+    }
+  }
   return (
     <div className="w-full">
       <div className="w-full bg-gray-100 pb-10">
@@ -16,17 +45,37 @@ const Signin = () => {
                 <input
                   className="w-full lowercase py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                   type="email"
+                  onChange={handleEmail}
+                  value={email}
                 />
+                  {errEmail && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont text-extrabold text-base">
+                      !
+                    </span>
+                    {errEmail}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Password</p>
                 <input
                   className="w-full lowercase py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                   type="password"
+                  onChange={handlePassword}
+                  value={password}  
                 />
+                  {errPassword && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont text-extrabold text-base">
+                      !
+                    </span>
+                    {errPassword}
+                  </p>
+                )}
               </div>
               <button
-                onClick={(e) => e.preventDefault()}
+                onClick={handleLogin}
                 className="w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput"
               >
                 Coninue
@@ -42,12 +91,14 @@ const Signin = () => {
                 Privacy Policy
               </span>
             </p>
+            <Link to="/"> 
             <p className="text-xs text-gray-600 mt-4">
               <ArrowRightIcon />
               <span className="text-blue-600  hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer">
-                Need Help
+                Back To Home
               </span>
             </p>
+            </Link>
           </div>
           <p className="w-full text-xs text-gray-600 mt-4 flex items-center">
             <span className="w-1/3 h-[1px] bg-zinc-400 inline-flex"></span>

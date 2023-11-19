@@ -1,8 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import { darklogo } from "../assets/index";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Link } from "react-router-dom";
 const Registration = () => {
+  const [clientName, setClientName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cPassword, setCPassword] = useState("");
+
+  // error messages section start
+  const [errClientName, setErrClientName] = useState("");
+  const [errEmail, setErrEmail] = useState("");
+  const [errPassword, setErrPassword] = useState("");
+  const [errCPassword, setErrCPassword] = useState("");
+  // error messages section end
+
+  // handle function section start
+  const handleName = (e) => {
+    setClientName(e.target.value);
+    setErrClientName("");
+  };
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    setErrEmail("");
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    setErrPassword("");
+  };
+  const handleCPassword = (e) => {
+    setCPassword(e.target.value);
+    setErrCPassword("");
+  };
+
+  // email validation start
+  const emailValidation = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/);
+  };
+  // email validation end
+
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    if (!clientName) {
+      setErrClientName("Enter Your Name");
+    }
+    if (!email) {
+      setErrEmail("Enter Your Email");
+    } else {
+      if (!emailValidation(email)) {
+        setErrEmail("Enter a valid email");
+      }
+    }
+    if (!password) {
+      setErrPassword("Enter Your Password");
+    } else {
+      if (password.length > 6) {
+        setErrPassword("Passwords must be at least 6 characters");
+      }
+    }
+    if (!cPassword) {
+      setErrCPassword("Confirm your password");
+    } else {
+      if (cPassword !== password) {
+        setErrCPassword("Password does not match");
+      }
+    }
+
+    if (
+      clientName &&
+      email &&
+      emailValidation(email) &&
+      password &&
+      password.length >= 6 &&
+      cPassword &&
+      cPassword === password
+    ) {
+      console.log(clientName, email, password, cPassword);
+      setClientName("");
+      setEmail("");
+      setPassword("");
+      setCPassword("");
+      setErrCPassword("");
+    }
+  };
+  // handle function section end
   return (
     <div className="w-full">
       <div className="w-full bg-gray-100 pb-10">
@@ -16,36 +99,76 @@ const Registration = () => {
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Your Name</p>
                 <input
+                  onChange={handleName}
+                  value={clientName}
                   type="text"
                   className="w-full  py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
+                {errClientName && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont text-extrabold text-base">
+                      !
+                    </span>
+                    {errClientName}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Email or Phone Numer</p>
                 <input
+                  onChange={handleEmail}
+                  value={email}
                   type="text"
                   className="w-full  py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
+                {errEmail && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont text-extrabold text-base">
+                      !
+                    </span>
+                    {errEmail}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Password</p>
                 <input
+                  onChange={handlePassword}
+                  value={password}
                   type="password"
                   className="w-full  py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
+                {errPassword && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont text-extrabold text-base">
+                      !
+                    </span>
+                    {errPassword}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-medium">Re-enter Password</p>
                 <input
+                  onChange={handleCPassword}
+                  value={cPassword}
                   type="password"
                   className="w-full  py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
+                {errCPassword && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont text-extrabold text-base">
+                      !
+                    </span>
+                    {errCPassword}
+                  </p>
+                )}
                 <p className="text-sm text-gray-500">
                   Password must be atleast 6 characters.
                 </p>
               </div>
               <button
-                onClick={(e) => e.preventDefault()}
+                onClick={handleRegistration}
                 className="w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput"
               >
                 Coninue
@@ -64,12 +187,12 @@ const Registration = () => {
                 <p className="text-xs text-black">
                   Already have an account?{" "}
                   <Link to="/signin">
-                  <span className="text-blue-600  hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer">
-                    Signin{" "}
-                    <span>
-                      <ArrowRightIcon />
+                    <span className="text-blue-600  hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer">
+                      Signin{" "}
+                      <span>
+                        <ArrowRightIcon />
+                      </span>
                     </span>
-                  </span>
                   </Link>
                 </p>
                 <p className="text-xs text-black -mt-2">
