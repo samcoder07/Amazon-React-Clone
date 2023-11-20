@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { darklogo } from "../assets/index";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import {RotatingLines} from "react-loader-spinner";
+import {motion} from "framer-motion"
 const Registration = () => {
+  const navigate = useNavigate()
+  const auth = getAuth();
   const [clientName, setClientName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +18,13 @@ const Registration = () => {
   const [errEmail, setErrEmail] = useState("");
   const [errPassword, setErrPassword] = useState("");
   const [errCPassword, setErrCPassword] = useState("");
+  const [firebaseErr,setFirebaseErr]=useState("")
   // error messages section end
+
+  // loading state start
+  const [Loading, setLoading] = useState(false)
+  const[successMsg,setSuccessMsg] = useState(""); 
+  // loading state end 
 
   // handle function section start
   const handleName = (e) => {
@@ -48,6 +59,7 @@ const Registration = () => {
     }
     if (!email) {
       setErrEmail("Enter Your Email");
+      setFirebaseErr("")
     } else {
       if (!emailValidation(email)) {
         setErrEmail("Enter a valid email");
@@ -77,12 +89,35 @@ const Registration = () => {
       cPassword &&
       cPassword === password
     ) {
-      console.log(clientName, email, password, cPassword);
+      setLoading(true)
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        updateProfile(auth.currentUser,{
+          displayName:clientName,
+          photoURL:"https://www.noormohmmad.live/static/media/roundedProfile.477a194221d255c8ce26.png",
+        })
+        // Signed up 
+        const user = userCredential.user;
+        setLoading(false)
+        setSuccessMsg("Account Created Successfully!");
+        setTimeout(()=>{
+          navigate("/signin")
+        },3000)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode.includes("auth/email-already-in-use")) {
+          setFirebaseErr("Email already in use, Try Another one")
+        }
+        // ..
+      });
       setClientName("");
       setEmail("");
       setPassword("");
       setCPassword("");
       setErrCPassword("");
+      setFirebaseErr("");
     }
   };
   // handle function section end
@@ -121,12 +156,12 @@ const Registration = () => {
                   type="text"
                   className="w-full  py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                 />
-                {errEmail && (
+                {firebaseErr && (
                   <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
                     <span className="italic font-titleFont text-extrabold text-base">
                       !
                     </span>
-                    {errEmail}
+                    {firebaseErr}
                   </p>
                 )}
               </div>
@@ -173,6 +208,26 @@ const Registration = () => {
               >
                 Coninue
               </button>
+              {
+                Loading && (
+                  <div className="flex justify-center">
+                    <RotatingLines
+                      strokeColor="#febd69"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="50"
+                      visible={true}
+                    />
+                  </div>
+                )
+              }
+              {
+                successMsg && (
+                  <div>
+                    <motion.p initial={{y:10,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:.5}} className="text-base font-titleFont text-green-500 border-[1px] border-green-500 px-2 text-center">{successMsg}</motion.p>
+                  </div>
+                )
+              }
               <p className="text-xs text-black leading-4 mt-4">
                 By continuing, you agree to Amazon's{" "}
                 <span className="text-blue-600 cursor-pointer">
@@ -187,7 +242,7 @@ const Registration = () => {
                 <p className="text-xs text-black">
                   Already have an account?{" "}
                   <Link to="/signin">
-                    <span className="text-blue-600  hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer">
+                  <span className="text-blue-600  hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer">
                       Signin{" "}
                       <span>
                         <ArrowRightIcon />
