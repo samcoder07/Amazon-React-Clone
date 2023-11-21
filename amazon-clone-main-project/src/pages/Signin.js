@@ -87,7 +87,7 @@ const Signin = () => {
            <h2 className="font-titleFont text-3xl font-medium mb-4">Signin</h2>
            <div className="flex flex-col gap-3">
              <div className="flex flex-col gap-2">
-               <p className="text-sm font-medium">Email or Phone Number</p>
+               <p className="text-sm font-medium">Email</p>
                <input
                  className="w-full lowercase py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
                  type="email"

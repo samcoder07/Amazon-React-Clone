@@ -68,7 +68,9 @@ const Cart = () => {
          <div>
            <p className='font-semibold px-10 py-1 gap-1 flex items-center justify-between'>Total: <span className='text-lg font-bold'>${totalPrice}</span></p>
          </div>
+         <Link to ="/checkout" className='w-full'>
          <button className='w-full font-titleFont font-medium text-base bg-gradient-to-tr from-yellow-400 to-yellow-200 hover:from-yellow-300 hover:to-yellow-300 border-yello-500 hover:border-yellow-700 active:bg-gradient-to-bl active:from-yellow-400 active:to-yellow-500 duration-200 py-1.5 rounded-md mt-3'>Proceed to Pay</button>
+        </Link>
         </div>
        </div>
        ) : 
