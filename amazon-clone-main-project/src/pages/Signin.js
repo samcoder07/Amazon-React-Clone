@@ -4,7 +4,10 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {RotatingLines} from "react-loader-spinner";
+import {useDispatch} from "react-redux"
+import {setUserInfo} from "../redux/amazonSlice"
 const Signin = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const auth = getAuth();
   const[email,setEmail] = useState("")
@@ -43,7 +46,12 @@ const Signin = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
+          dispatch(setUserInfo({
+           _id:user.uid,
+           userName:user.displayName,
+           email:user.email,
+           image:user.photoURL
+          }))
           // ...
           setLoading(false)
           setSuccessMsg("Login Successfull! Welcome you back!")

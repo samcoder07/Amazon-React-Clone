@@ -94,7 +94,7 @@ const Registration = () => {
       .then((userCredential) => {
         updateProfile(auth.currentUser,{
           displayName:clientName,
-          photoURL:"https://www.noormohmmad.live/static/media/roundedProfile.477a194221d255c8ce26.png",
+          photoURL:"https://www.pexels.com/photo/calm-body-of-lake-between-mountains-346529/",
         })
         // Signed up 
         const user = userCredential.user;
